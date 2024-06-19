@@ -5,7 +5,7 @@ import Skeleton from "@/components/ui/skeleton";
 import Card from "@/components/ui/Card";
 import { Fragment } from "react";
 import Link from "next/link";
-export default function Home() {
+export default async function Home() {
   const videos =  await getVideos()
   return (
     <main className={styles.main}>
