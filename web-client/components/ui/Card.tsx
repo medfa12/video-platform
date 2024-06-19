@@ -1,5 +1,5 @@
 import React from "react";
-const Card = (videoID:string) => {
+const Card = (videoID:any) => {
   return (
     <div className="border p-4 rounded shadow-2xl w-[80%] max-w-[500px]">
       <div className="relative h-60 mb-4">

@@ -6,7 +6,7 @@ import Card from "@/components/ui/Card";
 import { Fragment } from "react";
 import Link from "next/link";
 export default function Home() {
-   const videos = await getVideos()
+  const videos =  await getVideos()
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -28,3 +28,4 @@ export default function Home() {
     </main>
   );
 }
+export const revalidate = 0;

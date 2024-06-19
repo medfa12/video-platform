@@ -2,6 +2,7 @@ import express  from "express";
 import ffmpeg from "fluent-ffmpeg"
 import { convertVideo, deleteProcessedVideo, deleteRawVideo, downloadRawVideo, setupDirectories, uploadProcessedVideo } from "./gstorage";
 import { upload } from "@google-cloud/storage/build/cjs/src/resumable-upload";
+import { isVideoNew, setVideo } from "./firestore";
 setupDirectories();
 const app = express();
 app.use(express.json());
@@ -22,6 +23,17 @@ app.post("/process-video",async (req,res)=> {
 
    const inputFileName = data.name;
    const outputFileName = `ps-${inputFileName}`;
+   const videoId =inputFileName.split('.')[0];
+   if (!isVideoNew(videoId)){
+    return res.status(400).send("already processing or processed");
+   }
+   else {
+    setVideo(videoId,{
+        id:videoId,
+        uid: videoId.split('-')[0],
+        status:'processing'
+    })
+   }
    await downloadRawVideo(inputFileName);
    try{
     await convertVideo(inputFileName,outputFileName);
@@ -35,6 +47,10 @@ app.post("/process-video",async (req,res)=> {
    }
 
    await uploadProcessedVideo(outputFileName);
+   await setVideo(videoId,{
+    status:'processed',
+    filename:outputFileName,
+   })
    await Promise.all([
     deleteRawVideo(inputFileName),
     deleteProcessedVideo(outputFileName)])
