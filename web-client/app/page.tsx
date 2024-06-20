@@ -13,7 +13,7 @@ export default async function Home() {
        <h1 >home</h1>
       </div>
       <Fragment>
-      videos?<Skeleton/>:{
+      {videos?
         videos.map((video)=>
         (
           <><Link href={`watch?v=${video.filename}`} key={video.id} >
@@ -22,8 +22,11 @@ export default async function Home() {
 
           )
           )
+          :
+          (<Skeleton/>)
         
-      }
+      
+    }
       </Fragment>
     </main>
   );

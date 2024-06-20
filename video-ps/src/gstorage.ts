@@ -2,8 +2,8 @@ import {Bucket, Storage} from "@google-cloud/storage";
 import fs from 'fs';
 import ffmpeg from "fluent-ffmpeg";
 const storage = new Storage();
-const rawVideoBucketName = "DemoMtubeRaw";
-const processedVideoBucketName = "DemoMtubeProcessed";
+const rawVideoBucketName = "demomtuberawx";
+const processedVideoBucketName = "demomtubeprocessedx";
 const localRawVideoPath = "./RawVideos";
 const localProcessedVideoPath = "./ProcessedVideos"    
 

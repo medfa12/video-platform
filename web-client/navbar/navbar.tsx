@@ -23,7 +23,7 @@ return(
 <Link href="/">
 <Image width={90} height={20} src="/file.png" alt="mtube"/>
 </Link>
-user&&<Uplaod/>
+{user&&(<Uplaod/>)}
 <SignIn user ={user}/>
 </nav>
 );
